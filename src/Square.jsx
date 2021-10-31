@@ -14,30 +14,23 @@ export function Square(props) {
         borderColor = 'blackBorder';
     }
 
-    const dispatch = useDispatch();
 
-    return (<div onClick={() => dispatch(
-        {
-            type: 'boardClick',
-            x: props.x,
-            y: props.y,
+    return (<div onClick={() => {
+        const x = props.x;
+        const y = props.y;
+        const boardState = props.boardState;
+        if (symbol === 'X') {
+            boardState[x][y] = '0';
+        } else {
+            boardState[x][y] = 'X'
         }
-    )} id="square" class={borderColor}>
+        props.onClick([...boardState]);
+
+        }
+    } id="square" class={borderColor}>
         {symbol}
     </div>);
 }
 
-   // if (state === 'X') {
-    //     setState('0');
-    // } else if (state === '0') {
-    //     setState('');
-    // } else {
-    //     setState('X')
-    // }
 
-// export function SmallerSquare(props) {
-//     const [countState, setCountState] = useState(0)
-//     return (<div onClick={() => setCountState(100 + countState)}>
-//         Click Count: {countState}
-//         </div>)
-// }
+
