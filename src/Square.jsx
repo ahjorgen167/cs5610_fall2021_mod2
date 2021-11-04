@@ -1,10 +1,28 @@
 // import SmallerSquare from "./SmallerSquare";
-import React from 'react';
+import React, { useContext, useReducer } from 'react';
 import { useDispatch } from 'react-redux';
+import { BoardClickCountContext } from './BoardClickCountProvider';
 import './Square.css';
 
+
+function exclamationReducer(state, action) {
+
+
+    if (action.type === "CLICK") {
+        if (action.symbol === 'X') {
+            return '!'
+        } else {
+            return '?'
+        }
+    }
+    return state;
+}
+
 export function Square(props) {
+    const [globalCountState, globalCountDispatch] = useContext(BoardClickCountContext);
+
     const symbol = props.symbol;
+    // useEffect(() => alert(symbol + " just played"), [symbol]);
     
     // const [state, setState] = useState(props.symbol);
     let borderColor = 'purpleBorder';
@@ -16,13 +34,18 @@ export function Square(props) {
 
     const dispatch = useDispatch();
 
-    return (<div onClick={() => dispatch(
-        {
+    return (<div onClick={() => {
+        dispatch({
             type: 'boardClick',
             x: props.x,
             y: props.y,
-        }
-    )} id="square" class={borderColor}>
+        })
+        globalCountDispatch({
+            type: "boardClick",
+            symbol,
+        })
+    }
+    } id="square" class={borderColor}>
         {symbol}
     </div>);
 }
