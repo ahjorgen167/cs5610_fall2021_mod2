@@ -6,11 +6,17 @@ const defaultState = {
 }
 
 function generateGameBoard() {
+    const defaultState = {
+        count: 0,
+        gameBoard: [['','',''],
+        ['','',''],
+        ['','','']]
+    }
+    // insert random boats
     return defaultState.gameBoard;
 }
 
 export default function gameReducer(state, action) {
-    debugger;
     
     if (state === undefined) {
         return generateGameBoard()

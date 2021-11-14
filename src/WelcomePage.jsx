@@ -7,7 +7,7 @@ export default function WelcomePage() {
         <h1>
         Welcome to Tic-Tac-Toe!
         </h1>
-        <Link to={"/gameBoard"}>Play Game</Link>
+        <Link to={"/gameBoard/easy"}>Play Game</Link>
     </div>)
 
 }
